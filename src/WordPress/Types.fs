@@ -77,11 +77,10 @@ module Types =
       versionHistory: Link list;
       attachments: Link list;
       terms: Link list;
-      curies: Link list;
     }
 
     static member FromJson (_ : LinkCollections) =
-      fun s co ab au r v at t cu ->
+      fun s co ab au r v at t ->
             { self = s
               collections = co
               abouts = ab
@@ -89,8 +88,7 @@ module Types =
               replies = r
               versionHistory = v
               attachments = at
-              terms = t
-              curies = cu }
+              terms = t }
       <!> Json.read "self"
       <*> Json.read "collection"
       <*> Json.read "about"
@@ -99,7 +97,6 @@ module Types =
       <*> Json.read "version-history"
       <*> Json.read "wp:attachment"
       <*> Json.read "wp:term"
-      <*> Json.read "curies"
 
   type Post =
     {
