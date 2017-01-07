@@ -1,0 +1,34 @@
+{
+  "version": "1.0.0-*",
+  "buildOptions": {
+    "debugType": "portable",
+    "compilerName": "fsc",
+    "compile": {
+      "includeFiles": [
+        "Types.fs",
+        "WordPress.fs"
+      ]
+    }
+  },
+  "tools": {
+    "dotnet-compile-fsc": "1.0.0-preview2-*"
+  },
+  "dependencies": {
+    "Chiron": "6.2.1"
+  },
+  "frameworks": {
+    "netstandard1.6": {
+      "dependencies": {
+        "NETStandard.Library": "1.6.0",
+        "Microsoft.FSharp.Core.netcore": "1.0.0-alpha-160629"
+      },
+      "imports": [
+        "portable-net45+win8+wp8+wpa81",
+        "net40-client"
+      ]
+    }
+  },
+  "tooling": {
+    "defaultNamespace": "WordPress"
+  }
+}
