@@ -135,9 +135,9 @@ module Types =
       //         "link": "https:\/\/slogsdon.azurewebsites.net\/author\/shane\/",
       //         "slug": "shane",
       //         "avatar_urls": {
-      //             "24": "https:\/\/secure.gravatar.com\/avatar\/033132c341296d7f5e5b41e871178418?s=24&d=mm&r=g",
-      //             "48": "https:\/\/secure.gravatar.com\/avatar\/033132c341296d7f5e5b41e871178418?s=48&d=mm&r=g",
-      //             "96": "https:\/\/secure.gravatar.com\/avatar\/033132c341296d7f5e5b41e871178418?s=96&d=mm&r=g"
+      //             "24": "https:\/\/localhost\/image?s=24&d=mm&r=g",
+      //             "48": "https:\/\/localhost\/image?s=48&d=mm&r=g",
+      //             "96": "https:\/\/localhost\/image?s=96&d=mm&r=g"
       //         },
       //         "_links": {
       //             "self": [{
