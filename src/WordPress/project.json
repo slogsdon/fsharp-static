@@ -5,6 +5,7 @@
     "compilerName": "fsc",
     "compile": {
       "includeFiles": [
+        "Extensions.fs",
         "Types.fs",
         "WordPress.fs"
       ]

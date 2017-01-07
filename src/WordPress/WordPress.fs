@@ -28,27 +28,21 @@ module WordPress =
       | false -> ""
       | true -> "_embed"
 
-    [| "?"; embed |]
+    [| embed |]
     |> Seq.filter(String.IsNullOrEmpty >> not)
     |> String.concat("&")
 
   /// Builds a `System.Uri` object for a single request
   let buildUri (endpoint : string) (options : Options) =
+    if [| "http"; "https" |] |> Seq.contains options.apiScheme |> not
+    then invalidArg "Options.apiScheme" "Scheme is invalid."
+
     let uri = new UriBuilder()
     uri.Host <- options.apiHost
     uri.Scheme <- options.apiScheme
     uri.Path <- endpointBase + endpoint
     uri.Query <- getQuery options
     uri.Uri
-
-  module Async =
-    /// Convenience function to provide `map` functionality to `Async<'a>`
-    let map f op =
-      async {
-        let! x = op
-        let value = f x
-        return value
-      }
 
   /// Wraps WordPress REST API (v2) endpoints for obtaining post
   /// data from a WordPress installation
