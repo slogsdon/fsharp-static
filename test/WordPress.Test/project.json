@@ -33,7 +33,11 @@
     "compilerName": "fsc",
     "compile": {
       "includeFiles": [
-        "WordPressTest.fs"
+        "WordPressTest.fs",
+        "WordPress.PostsTest.fs",
+        "WordPress.PagesTest.fs",
+        "WordPress.TagsTest.fs",
+        "WordPress.CategoriesTest.fs"
       ]
     },
     "copyToOutput": {

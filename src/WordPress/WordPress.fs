@@ -110,3 +110,57 @@ module WordPress =
     /// Gets a single page by `id` asynchronously
     let getSingleAsync id options =
       getSingleWithArgsAsync id (Map.ofList []) options
+
+  /// Wraps WordPress REST API (v2) endpoints for obtaining tag
+  /// data from a WordPress installation
+  module Tags =
+    /// Gets all tags asynchronously with arguments
+    let getAllWithArgsAsync(args : Map<string, ApiArgument>) (options : Options)  : Async<Tag list> =
+      buildUriWithArgs "/tags" args options
+      |> (match options.apiClient with
+          | Default -> getResponseBodyAsync
+          | Func fn -> fn)
+      |> Async.map(Json.parse >> Json.deserialize)
+
+    /// Gets all tags asynchronously
+    let getAllAsync options =
+      getAllWithArgsAsync (Map.ofList []) options
+
+    /// Gets a single tag by `id` asynchronously with arguments
+    let getSingleWithArgsAsync (id : int) (args : Map<string, ApiArgument>) (options : Options) : Async<Tag> =
+      buildUriWithArgs (sprintf "/tags/%i" id) args options
+      |> (match options.apiClient with
+          | Default -> getResponseBodyAsync
+          | Func fn -> fn)
+      |> Async.map(Json.parse >> Json.deserialize)
+
+    /// Gets a single tag by `id` asynchronously
+    let getSingleAsync id options =
+      getSingleWithArgsAsync id (Map.ofList []) options
+
+  /// Wraps WordPress REST API (v2) endpoints for obtaining category
+  /// data from a WordPress installation
+  module Categories =
+    /// Gets all categories asynchronously with arguments
+    let getAllWithArgsAsync(args : Map<string, ApiArgument>) (options : Options)  : Async<Category list> =
+      buildUriWithArgs "/categories" args options
+      |> (match options.apiClient with
+          | Default -> getResponseBodyAsync
+          | Func fn -> fn)
+      |> Async.map(Json.parse >> Json.deserialize)
+
+    /// Gets all categories asynchronously
+    let getAllAsync options =
+      getAllWithArgsAsync (Map.ofList []) options
+
+    /// Gets a single category by `id` asynchronously with arguments
+    let getSingleWithArgsAsync (id : int) (args : Map<string, ApiArgument>) (options : Options) : Async<Category> =
+      buildUriWithArgs (sprintf "/categories/%i" id) args options
+      |> (match options.apiClient with
+          | Default -> getResponseBodyAsync
+          | Func fn -> fn)
+      |> Async.map(Json.parse >> Json.deserialize)
+
+    /// Gets a single category by `id` asynchronously
+    let getSingleAsync id options =
+      getSingleWithArgsAsync id (Map.ofList []) options

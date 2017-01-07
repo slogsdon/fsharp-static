@@ -303,3 +303,72 @@ module Types =
       <*> Json.read "categories"
       <*> Json.read "tags"
       <*> Json.read "_links"
+
+  type Tag =
+    { id: int;
+      count: int;
+      description: string;
+      link: string;
+      name: string;
+      slug: string;
+      taxonomy: string;
+      // meta
+      links: LinkCollections; }
+
+    static member FromJson (_ : Tag) =
+      fun i c d l n s t ls ->
+            { id = i
+              count = c
+              description = d
+              link = l
+              name = n
+              slug = s
+              taxonomy = t
+              // meta
+              links = ls
+              }
+      <!> Json.read "id"
+      <*> Json.read "count"
+      <*> Json.read "description"
+      <*> Json.read "link"
+      <*> Json.read "name"
+      <*> Json.read "slug"
+      <*> Json.read "taxonomy"
+      // <*> Json.read "meta"
+      <*> Json.read "_links"
+
+  type Category =
+    { id: int;
+      count: int;
+      description: string;
+      link: string;
+      name: string;
+      slug: string;
+      taxonomy: string;
+      parentId: int;
+      // meta
+      links: LinkCollections; }
+
+    static member FromJson (_ : Category) =
+      fun i c d l n s t pi ls ->
+            { id = i
+              count = c
+              description = d
+              link = l
+              name = n
+              slug = s
+              taxonomy = t
+              parentId = pi
+              // meta
+              links = ls
+              }
+      <!> Json.read "id"
+      <*> Json.read "count"
+      <*> Json.read "description"
+      <*> Json.read "link"
+      <*> Json.read "name"
+      <*> Json.read "slug"
+      <*> Json.read "taxonomy"
+      <*> Json.read "parent"
+      // <*> Json.read "meta"
+      <*> Json.read "_links"

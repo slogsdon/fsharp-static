@@ -9,6 +9,7 @@ open WordPress.Types
 // https://xunit.github.io/docs/getting-started-dotnet-core.html
 module WordPressTest =
   let readFixture file = "./fixtures/" + file |> IO.File.ReadAllText
+  let apiClient response = Func (fun _ -> async { return response })
 
   [<Fact>]
   let ``WordPress getQuery returns empty string with defaultOptions`` () =
@@ -83,71 +84,3 @@ module WordPressTest =
     ))
 
     Assert.Equal("Scheme is invalid.\nParameter name: Options.apiScheme", ex.Message)
-
-  let apiClient response = Func (fun _ -> async { return response })
-
-  module Posts =
-    [<Fact>]
-    let ``WordPress.Posts getAllAsync with empty response``  () =
-      let options =
-        { defaultOptions with
-            apiHost = "localhost";
-            apiClient = apiClient "[]"; }
-
-      WordPress.Posts.getAllAsync options
-      |> Async.map(Assert.Empty)
-
-    [<Fact>]
-    let ``WordPress.Posts getAllAsync with non-empty response``  () =
-      let response = readFixture "AllPosts.json"
-      let options =
-        { defaultOptions with
-            apiHost = "localhost";
-            apiClient = apiClient response; }
-
-      WordPress.Posts.getAllAsync options
-      |> Async.map(Assert.NotEmpty)
-
-    [<Fact>]
-    let ``WordPress.Posts getAllAsync with non-empty response + embeds`` () =
-      let response = readFixture "AllPostsWithEmbed.json"
-      let options =
-        { defaultOptions with
-            apiHost = "localhost";
-            apiClient = apiClient response; }
-
-      WordPress.Posts.getAllAsync options
-      |> Async.map(Assert.NotEmpty)
-
-  module Pages =
-    [<Fact>]
-    let ``WordPress.Pages getAllAsync with empty response``  () =
-      let options =
-        { defaultOptions with
-            apiHost = "localhost";
-            apiClient = apiClient "[]"; }
-
-      WordPress.Pages.getAllAsync options
-      |> Async.map(Assert.Empty)
-
-    [<Fact>]
-    let ``WordPress.Pages getAllAsync with non-empty response``  () =
-      let response = readFixture "AllPages.json"
-      let options =
-        { defaultOptions with
-            apiHost = "localhost";
-            apiClient = apiClient response; }
-
-      WordPress.Posts.getAllAsync options
-      |> Async.map(Assert.NotEmpty)
-
-    [<Fact>]
-    let ``WordPress.Pages getAllAsync with non-empty response + embeds`` () =
-      let response = readFixture "AllPagesWithEmbed.json"
-      let options =
-        { defaultOptions with
-            apiHost = "localhost";
-            apiClient = apiClient response; }
-
-      WordPress.Pages.getAllAsync options
-      |> Async.map(Assert.NotEmpty)
