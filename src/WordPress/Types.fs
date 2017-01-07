@@ -30,77 +30,26 @@ module Types =
     | Bool of bool
 
   type Options =
-    {
-      apiClient: ApiClient;
+    { apiClient: ApiClient;
       apiHost: string;
       apiScheme: string;
-      embedRelations: bool;
-    }
+      embedRelations: bool; }
 
   let defaultOptions =
-    {
-      apiClient = Default;
+    { apiClient = Default;
       apiHost = "";
       apiScheme = "https";
-      embedRelations = false;
-    }
+      embedRelations = false; }
 
   type Link =
-    {
-      name: string;
+    { name: string;
       href: string;
       templated: bool;
       embeddable: bool;
-      taxonomy: string;
-    }
-
-    static member FromJson (_ : Link) =
-      fun n h te e tx ->
-            { name = n
-              href = h
-              templated = te
-              embeddable = e
-              taxonomy = tx }
-      <!> Json.readOrDefault "name" ""
-      <*> Json.readOrDefault "href" ""
-      <*> Json.readOrDefault "templated" false
-      <*> Json.readOrDefault "embeddable" false
-      <*> Json.readOrDefault "taxonomy" ""
-
-  type LinkCollections =
-    {
-      self: Link list;
-      collections: Link list;
-      abouts: Link list;
-      authors: Link list;
-      replies: Link list;
-      versionHistory: Link list;
-      attachments: Link list;
-      terms: Link list;
-    }
-
-    static member FromJson (_ : LinkCollections) =
-      fun s co ab au r v at t ->
-            { self = s
-              collections = co
-              abouts = ab
-              authors = au
-              replies = r
-              versionHistory = v
-              attachments = at
-              terms = t }
-      <!> Json.read "self"
-      <*> Json.read "collection"
-      <*> Json.read "about"
-      <*> Json.read "author"
-      <*> Json.read "replies"
-      <*> Json.read "version-history"
-      <*> Json.read "wp:attachment"
-      <*> Json.read "wp:term"
+      taxonomy: string; }
 
   type Post =
-    {
-      id: int;
+    { id: int;
       date: DateTime;
       dateGmt: DateTime;
       guid: string;
@@ -122,7 +71,6 @@ module Types =
       // meta: [],
       categoryIds: int list;
       tagIds: int list;
-      links: LinkCollections;
       // "_embedded": {
       //     "author": [{
       //         "id": 1,
@@ -253,7 +201,7 @@ module Types =
     }
 
     static member FromJson (_ : Post) =
-      fun i d dg g m mg s pt l t c e ai fmi cs ps st te f ci ti li ->
+      fun i d dg g m mg s pt l t c e ai fmi cs ps st te f ci ti ->
             { id = i
               date = d
               dateGmt = dg
@@ -275,8 +223,7 @@ module Types =
               format = f
               // meta: [],
               categoryIds = ci
-              tagIds = ti
-              links = li }
+              tagIds = ti }
       <!> Json.read "id"
       <*> Json.read "date"
       <*> Json.read "date_gmt"
@@ -299,7 +246,6 @@ module Types =
       // <*> Json.read "meta"
       <*> Json.read "categories"
       <*> Json.read "tags"
-      <*> Json.read "_links"
 
   type Tag =
     { id: int;
@@ -310,10 +256,10 @@ module Types =
       slug: string;
       taxonomy: string;
       // meta
-      links: LinkCollections; }
+      }
 
     static member FromJson (_ : Tag) =
-      fun i c d l n s t ls ->
+      fun i c d l n s t ->
             { id = i
               count = c
               description = d
@@ -322,7 +268,6 @@ module Types =
               slug = s
               taxonomy = t
               // meta
-              links = ls
               }
       <!> Json.read "id"
       <*> Json.read "count"
@@ -332,7 +277,6 @@ module Types =
       <*> Json.read "slug"
       <*> Json.read "taxonomy"
       // <*> Json.read "meta"
-      <*> Json.read "_links"
 
   type Category =
     { id: int;
@@ -344,10 +288,10 @@ module Types =
       taxonomy: string;
       parentId: int;
       // meta
-      links: LinkCollections; }
+      }
 
     static member FromJson (_ : Category) =
-      fun i c d l n s t pi ls ->
+      fun i c d l n s t pi ->
             { id = i
               count = c
               description = d
@@ -357,7 +301,6 @@ module Types =
               taxonomy = t
               parentId = pi
               // meta
-              links = ls
               }
       <!> Json.read "id"
       <*> Json.read "count"
@@ -368,4 +311,3 @@ module Types =
       <*> Json.read "taxonomy"
       <*> Json.read "parent"
       // <*> Json.read "meta"
-      <*> Json.read "_links"
