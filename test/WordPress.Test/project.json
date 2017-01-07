@@ -25,14 +25,15 @@
     }
   },
   "tools": {
-    "dotnet-compile-fsc": "1.0.0-preview2-*"
+    "dotnet-compile-fsc": "1.0.0-preview2-*",
+    "Microsoft.DotNet.Watcher.Tools": "1.1.0-preview4-final"
   },
   "buildOptions": {
     "debugType": "portable",
     "compilerName": "fsc",
     "compile": {
       "includeFiles": [
-        "UnitTest1.fs"
+        "WordPressTest.fs"
       ]
     },
     "copyToOutput": {
