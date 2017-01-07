@@ -72,14 +72,41 @@ module WordPress =
     let getAllAsync options =
       getAllWithArgsAsync (Map.ofList []) options
 
-    /// Gets a single post by `postId` asynchronously with arguments
-    let getSingleWithArgsAsync (postId : int) (args : Map<string, ApiArgument>) (options : Options) : Async<Post> =
-      buildUriWithArgs (sprintf "/posts/%i" postId) args options
+    /// Gets a single post by `id` asynchronously with arguments
+    let getSingleWithArgsAsync (id : int) (args : Map<string, ApiArgument>) (options : Options) : Async<Post> =
+      buildUriWithArgs (sprintf "/posts/%i" id) args options
       |> (match options.apiClient with
           | Default -> getResponseBodyAsync
           | Func fn -> fn)
       |> Async.map(Json.parse >> Json.deserialize)
 
-    /// Gets a single post by `postId` asynchronously
-    let getSingleAsync postId options =
-      getSingleWithArgsAsync postId (Map.ofList []) options
+    /// Gets a single post by `id` asynchronously
+    let getSingleAsync id options =
+      getSingleWithArgsAsync id (Map.ofList []) options
+
+  /// Wraps WordPress REST API (v2) endpoints for obtaining page
+  /// data from a WordPress installation
+  module Pages =
+    /// Gets all pages asynchronously with arguments
+    let getAllWithArgsAsync(args : Map<string, ApiArgument>) (options : Options)  : Async<Post list> =
+      buildUriWithArgs "/pages" args options
+      |> (match options.apiClient with
+          | Default -> getResponseBodyAsync
+          | Func fn -> fn)
+      |> Async.map(Json.parse >> Json.deserialize)
+
+    /// Gets all pages asynchronously
+    let getAllAsync options =
+      getAllWithArgsAsync (Map.ofList []) options
+
+    /// Gets a single page by `id` asynchronously with arguments
+    let getSingleWithArgsAsync (id : int) (args : Map<string, ApiArgument>) (options : Options) : Async<Post> =
+      buildUriWithArgs (sprintf "/pages/%i" id) args options
+      |> (match options.apiClient with
+          | Default -> getResponseBodyAsync
+          | Func fn -> fn)
+      |> Async.map(Json.parse >> Json.deserialize)
+
+    /// Gets a single page by `id` asynchronously
+    let getSingleAsync id options =
+      getSingleWithArgsAsync id (Map.ofList []) options
