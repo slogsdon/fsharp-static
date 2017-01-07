@@ -11,7 +11,7 @@ module WordPressTest =
   [<Fact>]
   let ``WordPress getQuery returns empty string with defaultOptions`` () =
     let options = defaultOptions
-    let actual = WordPress.getQuery options
+    let actual = WordPress.getQuery (Map.ofList []) options
     let expected = ""
 
     Assert.Equal(expected, actual)
@@ -19,13 +19,23 @@ module WordPressTest =
   [<Fact>]
   let ``WordPress getQuery returns correctly with Options.embedRelations = true`` () =
     let options = { defaultOptions with embedRelations = true }
-    let actual = WordPress.getQuery options
-    let expected = "_embed"
+    let actual = WordPress.getQuery (Map.ofList []) options
+    let expected = "_embed=1"
 
     Assert.Equal(expected, actual)
 
   [<Fact>]
-  let ``WordPress buildUri outp<tab>uts correctly with valid host`` () =
+  let ``WordPress getQuery returns correctly with non-empty arguments`` () =
+    let options = defaultOptions
+    let args = Map.ofList [ "order", String "desc"
+                            "order_by", String "date" ]
+    let actual = WordPress.getQuery args options
+    let expected = "order=desc&order_by=date"
+
+    Assert.Equal(expected, actual)
+
+  [<Fact>]
+  let ``WordPress buildUri outputs correctly with valid host`` () =
     let options = { defaultOptions with apiHost = "valid.host.localhost" }
     let actual = WordPress.buildUri "/posts" options
     let expected = new Uri("https://valid.host.localhost/wp-json/wp/v2/posts")
@@ -51,7 +61,7 @@ module WordPressTest =
           apiScheme = "http";
           embedRelations = true }
     let actual = WordPress.buildUri "/posts" options
-    let expected = new Uri("http://valid.host.localhost/wp-json/wp/v2/posts?_embed")
+    let expected = new Uri("http://valid.host.localhost/wp-json/wp/v2/posts?_embed=1")
 
     Assert.Equal(expected, actual)
 

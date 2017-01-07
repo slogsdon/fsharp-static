@@ -22,6 +22,13 @@ module Types =
     | Default
     | Func of (Uri -> Async<string>)
 
+  type ApiArgument =
+    | String of string
+    | Strings of string list
+    | Ints of int list
+    | Int of int
+    | Bool of bool
+
   type Options =
     {
       apiClient: ApiClient;
