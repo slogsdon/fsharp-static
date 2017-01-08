@@ -48,205 +48,6 @@ module Types =
       embeddable: bool;
       taxonomy: string; }
 
-  type Post =
-    { id: int;
-      date: DateTime;
-      dateGmt: DateTime;
-      guid: string;
-      modified: DateTime;
-      modifiedGmt: DateTime;
-      slug: string;
-      postType: string;
-      link: string;
-      title: string;
-      content: string;
-      excerpt: string;
-      authorId: int;
-      featuredMediaId: int;
-      commentStatus: string;
-      pingStatus: string;
-      sticky: bool;
-      template: string;
-      format: string;
-      // meta: [],
-      categoryIds: int list;
-      tagIds: int list;
-      // "_embedded": {
-      //     "author": [{
-      //         "id": 1,
-      //         "name": "shane",
-      //         "url": "",
-      //         "description": "",
-      //         "link": "https:\/\/slogsdon.azurewebsites.net\/author\/shane\/",
-      //         "slug": "shane",
-      //         "avatar_urls": {
-      //             "24": "https:\/\/localhost\/image?s=24&d=mm&r=g",
-      //             "48": "https:\/\/localhost\/image?s=48&d=mm&r=g",
-      //             "96": "https:\/\/localhost\/image?s=96&d=mm&r=g"
-      //         },
-      //         "_links": {
-      //             "self": [{
-      //                 "href": "https:\/\/slogsdon.azurewebsites.net\/wp-json\/wp\/v2\/users\/1"
-      //             }],
-      //             "collection": [{
-      //                 "href": "https:\/\/slogsdon.azurewebsites.net\/wp-json\/wp\/v2\/users"
-      //             }]
-      //         }
-      //     }],
-      //     "wp:term": [
-      //         [{
-      //             "id": 1,
-      //             "link": "https:\/\/slogsdon.azurewebsites.net\/category\/uncategorized\/",
-      //             "name": "Uncategorized",
-      //             "slug": "uncategorized",
-      //             "taxonomy": "category",
-      //             "_links": {
-      //                 "self": [{
-      //                     "href": "https:\/\/slogsdon.azurewebsites.net\/wp-json\/wp\/v2\/categories\/1"
-      //                 }],
-      //                 "collection": [{
-      //                     "href": "https:\/\/slogsdon.azurewebsites.net\/wp-json\/wp\/v2\/categories"
-      //                 }],
-      //                 "about": [{
-      //                     "href": "https:\/\/slogsdon.azurewebsites.net\/wp-json\/wp\/v2\/taxonomies\/category"
-      //                 }],
-      //                 "wp:post_type": [{
-      //                     "href": "https:\/\/slogsdon.azurewebsites.net\/wp-json\/wp\/v2\/posts?categories=1"
-      //                 }],
-      //                 "curies": [{
-      //                     "name": "wp",
-      //                     "href": "https:\/\/api.w.org\/{rel}",
-      //                     "templated": true
-      //                 }]
-      //             }
-      //         }],
-      //         [{
-      //             "id": 31,
-      //             "link": "https:\/\/slogsdon.azurewebsites.net\/tag\/here\/",
-      //             "name": "here",
-      //             "slug": "here",
-      //             "taxonomy": "post_tag",
-      //             "_links": {
-      //                 "self": [{
-      //                     "href": "https:\/\/slogsdon.azurewebsites.net\/wp-json\/wp\/v2\/tags\/31"
-      //                 }],
-      //                 "collection": [{
-      //                     "href": "https:\/\/slogsdon.azurewebsites.net\/wp-json\/wp\/v2\/tags"
-      //                 }],
-      //                 "about": [{
-      //                     "href": "https:\/\/slogsdon.azurewebsites.net\/wp-json\/wp\/v2\/taxonomies\/post_tag"
-      //                 }],
-      //                 "wp:post_type": [{
-      //                     "href": "https:\/\/slogsdon.azurewebsites.net\/wp-json\/wp\/v2\/posts?tags=31"
-      //                 }],
-      //                 "curies": [{
-      //                     "name": "wp",
-      //                     "href": "https:\/\/api.w.org\/{rel}",
-      //                     "templated": true
-      //                 }]
-      //             }
-      //         }, {
-      //             "id": 21,
-      //             "link": "https:\/\/slogsdon.azurewebsites.net\/tag\/tag\/",
-      //             "name": "tag",
-      //             "slug": "tag",
-      //             "taxonomy": "post_tag",
-      //             "_links": {
-      //                 "self": [{
-      //                     "href": "https:\/\/slogsdon.azurewebsites.net\/wp-json\/wp\/v2\/tags\/21"
-      //                 }],
-      //                 "collection": [{
-      //                     "href": "https:\/\/slogsdon.azurewebsites.net\/wp-json\/wp\/v2\/tags"
-      //                 }],
-      //                 "about": [{
-      //                     "href": "https:\/\/slogsdon.azurewebsites.net\/wp-json\/wp\/v2\/taxonomies\/post_tag"
-      //                 }],
-      //                 "wp:post_type": [{
-      //                     "href": "https:\/\/slogsdon.azurewebsites.net\/wp-json\/wp\/v2\/posts?tags=21"
-      //                 }],
-      //                 "curies": [{
-      //                     "name": "wp",
-      //                     "href": "https:\/\/api.w.org\/{rel}",
-      //                     "templated": true
-      //                 }]
-      //             }
-      //         }, {
-      //             "id": 11,
-      //             "link": "https:\/\/slogsdon.azurewebsites.net\/tag\/test\/",
-      //             "name": "test",
-      //             "slug": "test",
-      //             "taxonomy": "post_tag",
-      //             "_links": {
-      //                 "self": [{
-      //                     "href": "https:\/\/slogsdon.azurewebsites.net\/wp-json\/wp\/v2\/tags\/11"
-      //                 }],
-      //                 "collection": [{
-      //                     "href": "https:\/\/slogsdon.azurewebsites.net\/wp-json\/wp\/v2\/tags"
-      //                 }],
-      //                 "about": [{
-      //                     "href": "https:\/\/slogsdon.azurewebsites.net\/wp-json\/wp\/v2\/taxonomies\/post_tag"
-      //                 }],
-      //                 "wp:post_type": [{
-      //                     "href": "https:\/\/slogsdon.azurewebsites.net\/wp-json\/wp\/v2\/posts?tags=11"
-      //                 }],
-      //                 "curies": [{
-      //                     "name": "wp",
-      //                     "href": "https:\/\/api.w.org\/{rel}",
-      //                     "templated": true
-      //                 }]
-      //             }
-      //         }]
-      //     ]
-      // }
-    }
-
-    static member FromJson (_ : Post) =
-      fun i d dg g m mg s pt l t c e ai fmi cs ps st te f ci ti ->
-            { id = i
-              date = d
-              dateGmt = dg
-              guid = g
-              modified = m
-              modifiedGmt = mg
-              slug = s
-              postType = pt
-              link = l
-              title = t
-              content = c
-              excerpt = e
-              authorId = ai
-              featuredMediaId = fmi
-              commentStatus = cs
-              pingStatus = ps
-              sticky = st
-              template = te
-              format = f
-              // meta: [],
-              categoryIds = ci
-              tagIds = ti }
-      <!> Json.read "id"
-      <*> Json.read "date"
-      <*> Json.read "date_gmt"
-      <*> Json.readWith Json.stringFromRendered "guid"
-      <*> Json.read "modified"
-      <*> Json.read "modified_gmt"
-      <*> Json.read "slug"
-      <*> Json.read "type"
-      <*> Json.read "link"
-      <*> Json.readWith Json.stringFromRendered "title"
-      <*> Json.readWith Json.stringFromRendered "content"
-      <*> Json.readWith Json.stringFromRendered "excerpt"
-      <*> Json.read "author"
-      <*> Json.read "featured_media"
-      <*> Json.read "comment_status"
-      <*> Json.read "ping_status"
-      <*> Json.read "sticky"
-      <*> Json.read "template"
-      <*> Json.read "format"
-      // <*> Json.read "meta"
-      <*> Json.read "categories"
-      <*> Json.read "tags"
-
   type Tag =
     { id: int;
       count: int;
@@ -269,13 +70,13 @@ module Types =
               taxonomy = t
               // meta
               }
-      <!> Json.read "id"
-      <*> Json.read "count"
-      <*> Json.read "description"
-      <*> Json.read "link"
-      <*> Json.read "name"
-      <*> Json.read "slug"
-      <*> Json.read "taxonomy"
+      <!> Json.readOrDefault "id" 0
+      <*> Json.readOrDefault "count" 0
+      <*> Json.readOrDefault "description" ""
+      <*> Json.readOrDefault "link" ""
+      <*> Json.readOrDefault "name" ""
+      <*> Json.readOrDefault "slug" ""
+      <*> Json.readOrDefault "taxonomy" ""
       // <*> Json.read "meta"
 
   type Category =
@@ -302,12 +103,139 @@ module Types =
               parentId = pi
               // meta
               }
+      <!> Json.readOrDefault "id" 0
+      <*> Json.readOrDefault "count" 0
+      <*> Json.readOrDefault "description" ""
+      <*> Json.readOrDefault "link" ""
+      <*> Json.readOrDefault "name" ""
+      <*> Json.readOrDefault "slug" ""
+      <*> Json.readOrDefault "taxonomy" ""
+      <*> Json.readOrDefault "parent" 0
+      // <*> Json.read "meta"
+
+  type User =
+    { id: int;
+      name: string;
+      url: string;
+      description: string;
+      link: string;
+      slug: string;
+      avatarUrls: Map<string, string>; }
+
+    static member FromJson (_ : User) =
+      fun i n u d l s au ->
+            { id = i
+              name = n
+              url = u
+              description = d
+              link = l
+              slug = s
+              avatarUrls = au }
       <!> Json.read "id"
-      <*> Json.read "count"
+      <*> Json.read "name"
+      <*> Json.read "url"
       <*> Json.read "description"
       <*> Json.read "link"
-      <*> Json.read "name"
       <*> Json.read "slug"
-      <*> Json.read "taxonomy"
-      <*> Json.read "parent"
+      <*> Json.read "avatar_urls"
+
+  let categoriesFromTermSet json : JsonResult<Category list> =
+    match json with
+    | Array lists ->
+      Value (Seq.item 0 lists |> Json.deserialize)
+    | _ -> Error (sprintf "Unable to parse %A as a wp:term" json)
+
+  let tagsFromTermSet json : JsonResult<Tag list> =
+    match json with
+    | Array lists ->
+      Value (Seq.item 1 lists |> Json.deserialize)
+    | _ -> Error (sprintf "Unable to parse %A as a wp:term" json)
+
+  type EmbedCollection =
+    { authors: User list;
+      categories: Category list;
+      tags: Tag list; }
+
+    static member FromJson (_ : EmbedCollection) =
+      fun a c t ->
+            { authors = a
+              categories = c
+              tags = t }
+      <!> Json.read "author"
+      <*> Json.readWith categoriesFromTermSet "wp:term"
+      <*> Json.readWith tagsFromTermSet "wp:term"
+
+  type Post =
+    { id: int;
+      date: DateTime;
+      dateGmt: DateTime;
+      guid: string;
+      modified: DateTime;
+      modifiedGmt: DateTime;
+      slug: string;
+      postType: string;
+      link: string;
+      title: string;
+      content: string;
+      excerpt: string;
+      authorId: int;
+      featuredMediaId: int;
+      commentStatus: string;
+      pingStatus: string;
+      sticky: bool;
+      template: string;
+      format: string;
+      // meta: [],
+      categoryIds: int list;
+      tagIds: int list;
+      embeds: EmbedCollection;
+    }
+
+    static member FromJson (_ : Post) =
+      fun i d dg g m mg s pt l t c e ai fmi cs ps st te f ci ti em ->
+            { id = i
+              date = d
+              dateGmt = dg
+              guid = g
+              modified = m
+              modifiedGmt = mg
+              slug = s
+              postType = pt
+              link = l
+              title = t
+              content = c
+              excerpt = e
+              authorId = ai
+              featuredMediaId = fmi
+              commentStatus = cs
+              pingStatus = ps
+              sticky = st
+              template = te
+              format = f
+              // meta: [],
+              categoryIds = ci
+              tagIds = ti
+              embeds = em }
+      <!> Json.read "id"
+      <*> Json.read "date"
+      <*> Json.read "date_gmt"
+      <*> Json.readWith Json.stringFromRendered "guid"
+      <*> Json.read "modified"
+      <*> Json.read "modified_gmt"
+      <*> Json.read "slug"
+      <*> Json.read "type"
+      <*> Json.read "link"
+      <*> Json.readWith Json.stringFromRendered "title"
+      <*> Json.readWith Json.stringFromRendered "content"
+      <*> Json.readWith Json.stringFromRendered "excerpt"
+      <*> Json.read "author"
+      <*> Json.read "featured_media"
+      <*> Json.read "comment_status"
+      <*> Json.read "ping_status"
+      <*> Json.read "sticky"
+      <*> Json.read "template"
+      <*> Json.read "format"
       // <*> Json.read "meta"
+      <*> Json.read "categories"
+      <*> Json.read "tags"
+      <*> Json.read "_embedded"
