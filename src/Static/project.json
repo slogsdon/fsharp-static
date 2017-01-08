@@ -6,7 +6,7 @@
     "compilerName": "fsc",
     "compile": {
       "includeFiles": [
-        "Program.fs"
+        "Static.fs"
       ]
     }
   },
@@ -32,6 +32,7 @@
     "WordPress": {
       "target": "project",
       "version": "1.0.0"
-    }
+    },
+    "DotLiquid": "2.0.64"
   }
 }
