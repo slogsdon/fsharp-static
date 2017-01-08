@@ -15,7 +15,8 @@ module Categories =
           apiClient = apiClient "[]"; }
 
     WordPress.Categories.getAllAsync options
-    |> Async.map(Assert.Empty)
+    |> Async.RunSynchronously
+    |> Assert.Empty
 
   [<Fact>]
   let ``WordPress.Categories getAllAsync with non-empty response``  () =
@@ -26,4 +27,5 @@ module Categories =
           apiClient = apiClient response; }
 
     WordPress.Categories.getAllAsync options
-    |> Async.map(Assert.NotEmpty)
+    |> Async.RunSynchronously
+    |> Assert.NotEmpty

@@ -15,7 +15,8 @@ module Tags =
           apiClient = apiClient "[]"; }
 
     WordPress.Tags.getAllAsync options
-    |> Async.map(Assert.Empty)
+    |> Async.RunSynchronously
+    |> Assert.Empty
 
   [<Fact>]
   let ``WordPress.Tags getAllAsync with non-empty response``  () =
@@ -26,4 +27,5 @@ module Tags =
           apiClient = apiClient response; }
 
     WordPress.Tags.getAllAsync options
-    |> Async.map(Assert.NotEmpty)
+    |> Async.RunSynchronously
+    |> Assert.NotEmpty

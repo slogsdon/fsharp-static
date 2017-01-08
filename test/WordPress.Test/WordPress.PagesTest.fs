@@ -15,7 +15,8 @@ module Pages =
           apiClient = apiClient "[]"; }
 
     WordPress.Pages.getAllAsync options
-    |> Async.map(Assert.Empty)
+    |> Async.RunSynchronously
+    |> Assert.Empty
 
   [<Fact>]
   let ``WordPress.Pages getAllAsync with non-empty response``  () =
@@ -26,7 +27,8 @@ module Pages =
           apiClient = apiClient response; }
 
     WordPress.Pages.getAllAsync options
-    |> Async.map(Assert.NotEmpty)
+    |> Async.RunSynchronously
+    |> Assert.NotEmpty
 
   [<Fact>]
   let ``WordPress.Pages getAllAsync with non-empty response + embeds`` () =
@@ -37,4 +39,5 @@ module Pages =
           apiClient = apiClient response; }
 
     WordPress.Pages.getAllAsync options
-    |> Async.map(Assert.NotEmpty)
+    |> Async.RunSynchronously
+    |> Assert.NotEmpty

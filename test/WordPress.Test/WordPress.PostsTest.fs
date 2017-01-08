@@ -15,7 +15,8 @@ module Posts =
           apiClient = apiClient "[]"; }
 
     WordPress.Posts.getAllAsync options
-    |> Async.map(Assert.Empty)
+    |> Async.RunSynchronously
+    |> Assert.Empty
 
   [<Fact>]
   let ``WordPress.Posts getAllAsync with non-empty response``  () =
@@ -26,7 +27,8 @@ module Posts =
           apiClient = apiClient response; }
 
     WordPress.Posts.getAllAsync options
-    |> Async.map(Assert.NotEmpty)
+    |> Async.RunSynchronously
+    |> Assert.NotEmpty
 
   [<Fact>]
   let ``WordPress.Posts getAllAsync with non-empty response + embeds`` () =
@@ -37,4 +39,5 @@ module Posts =
           apiClient = apiClient response; }
 
     WordPress.Posts.getAllAsync options
-    |> Async.map(Assert.NotEmpty)
+    |> Async.RunSynchronously
+    |> Assert.NotEmpty
