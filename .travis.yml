@@ -5,6 +5,11 @@ sudo: false
 os: linux
 dist: trusty
 
+cache:
+  directories:
+    - $HOME/.local/share/NuGet/Cache
+    - tools
+
 install:
   - dotnet restore
 
