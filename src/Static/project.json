@@ -6,6 +6,8 @@
     "compilerName": "fsc",
     "compile": {
       "includeFiles": [
+        "Templates.fs",
+        "LocalFileSystem.fs",
         "Static.fs"
       ]
     }
