@@ -37,7 +37,8 @@
         "WordPress.PostsTest.fs",
         "WordPress.PagesTest.fs",
         "WordPress.TagsTest.fs",
-        "WordPress.CategoriesTest.fs"
+        "WordPress.CategoriesTest.fs",
+        "WordPress.UsersTest.fs"
       ]
     },
     "copyToOutput": {

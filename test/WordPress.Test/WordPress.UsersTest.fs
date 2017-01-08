@@ -6,26 +6,26 @@ open WordPress
 open WordPress.Types
 open WordPressTest
 
-module Tags =
+module Users =
   [<Fact>]
-  let ``WordPress.Tags getAllAsync with empty response``  () =
+  let ``WordPress.Users getAllAsync with empty response``  () =
     let options =
       { defaultOptions with
           apiHost = "localhost";
           apiClient = apiClient "[]"; }
 
-    WordPress.Tags.getAllAsync options
+    WordPress.Users.getAllAsync options
     |> Async.RunSynchronously
     |> Assert.Empty
 
   [<Fact>]
-  let ``WordPress.Tags getAllAsync with non-empty response``  () =
-    let response = readFixture "AllTags.json"
+  let ``WordPress.Users getAllAsync with non-empty response``  () =
+    let response = readFixture "AllUsers.json"
     let options =
       { defaultOptions with
           apiHost = "localhost";
           apiClient = apiClient response; }
 
-    WordPress.Tags.getAllAsync options
+    WordPress.Users.getAllAsync options
     |> Async.RunSynchronously
     |> Assert.NotEmpty

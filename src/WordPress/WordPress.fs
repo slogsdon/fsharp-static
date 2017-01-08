@@ -164,3 +164,30 @@ module WordPress =
     /// Gets a single category by `id` asynchronously
     let getSingleAsync id options =
       getSingleWithArgsAsync id (Map.ofList []) options
+
+  /// Wraps WordPress REST API (v2) endpoints for obtaining user
+  /// data from a WordPress installation
+  module Users =
+    /// Gets all users asynchronously with arguments
+    let getAllWithArgsAsync(args : Map<string, ApiArgument>) (options : Options)  : Async<User list> =
+      buildUriWithArgs "/users" args options
+      |> (match options.apiClient with
+          | Default -> getResponseBodyAsync
+          | Func fn -> fn)
+      |> Async.map(Json.parse >> Json.deserialize)
+
+    /// Gets all users asynchronously
+    let getAllAsync options =
+      getAllWithArgsAsync (Map.ofList []) options
+
+    /// Gets a single user by `id` asynchronously with arguments
+    let getSingleWithArgsAsync (id : int) (args : Map<string, ApiArgument>) (options : Options) : Async<User> =
+      buildUriWithArgs (sprintf "/users/%i" id) args options
+      |> (match options.apiClient with
+          | Default -> getResponseBodyAsync
+          | Func fn -> fn)
+      |> Async.map(Json.parse >> Json.deserialize)
+
+    /// Gets a single user by `id` asynchronously
+    let getSingleAsync id options =
+      getSingleWithArgsAsync id (Map.ofList []) options
