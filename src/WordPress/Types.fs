@@ -139,31 +139,31 @@ module Types =
       <*> Json.read "slug"
       <*> Json.read "avatar_urls"
 
-  let categoriesFromTermSet json : JsonResult<Category list> =
+  let categoriesFromTermSet json : JsonResult<Category list option> =
     match json with
     | Array lists ->
-      Value (Seq.item 0 lists |> Json.deserialize)
+      Value (Some (Seq.item 0 lists |> Json.deserialize))
     | _ -> Error (sprintf "Unable to parse %A as a wp:term" json)
 
-  let tagsFromTermSet json : JsonResult<Tag list> =
+  let tagsFromTermSet json : JsonResult<Tag list option> =
     match json with
     | Array lists ->
-      Value (Seq.item 1 lists |> Json.deserialize)
+      Value (Some (Seq.item 1 lists |> Json.deserialize))
     | _ -> Error (sprintf "Unable to parse %A as a wp:term" json)
 
   type EmbedCollection =
-    { authors: User list;
-      categories: Category list;
-      tags: Tag list; }
+    { authors: User list option;
+      categories: Category list option;
+      tags: Tag list option; }
 
     static member FromJson (_ : EmbedCollection) =
       fun a c t ->
             { authors = a
               categories = c
               tags = t }
-      <!> Json.read "author"
-      <*> Json.readWith categoriesFromTermSet "wp:term"
-      <*> Json.readWith tagsFromTermSet "wp:term"
+      <!> Json.readOrDefault "author" None
+      <*> Json.readWithOrDefault categoriesFromTermSet "wp:term" None
+      <*> Json.readWithOrDefault tagsFromTermSet "wp:term" None
 
   type Post =
     { id: int;
@@ -188,7 +188,7 @@ module Types =
       // meta: [],
       categoryIds: int list;
       tagIds: int list;
-      embeds: EmbedCollection;
+      embeds: EmbedCollection option;
     }
 
     static member FromJson (_ : Post) =
@@ -232,10 +232,10 @@ module Types =
       <*> Json.read "featured_media"
       <*> Json.read "comment_status"
       <*> Json.read "ping_status"
-      <*> Json.read "sticky"
+      <*> Json.readOrDefault "sticky" false
       <*> Json.read "template"
-      <*> Json.read "format"
+      <*> Json.readOrDefault "format" ""
       // <*> Json.read "meta"
-      <*> Json.read "categories"
-      <*> Json.read "tags"
-      <*> Json.read "_embedded"
+      <*> Json.readOrDefault "categories" []
+      <*> Json.readOrDefault "tags" []
+      <*> Json.readOrDefault "_embedded" None
