@@ -20,6 +20,14 @@ module WordPressTest =
     Assert.Equal(expected, actual)
 
   [<Fact>]
+  let ``AutoOpened WordPress getQuery returns empty string with defaultOptions`` () =
+    let options = defaultOptions
+    let actual = getQuery (Map.ofList []) options
+    let expected = ""
+
+    Assert.Equal(expected, actual)
+
+  [<Fact>]
   let ``WordPress getQuery returns correctly with Options.embedRelations = true`` () =
     let options = { defaultOptions with embedRelations = true }
     let actual = WordPress.getQuery (Map.ofList []) options

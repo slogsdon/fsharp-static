@@ -2,6 +2,7 @@ namespace WordPress
 
 /// Wraps WordPress REST API (v2) endpoints for obtaining data
 /// from a WordPress installation
+[<AutoOpen>]
 module WordPress =
   open Chiron
   open System
